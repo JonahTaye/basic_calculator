@@ -14,7 +14,7 @@ function divide(number1, number2) {
     return number1 / number2
 }
 
-let num1 = null
+let num1 = 0
 let num2 = null
 let operator = null
 let total = null
@@ -26,6 +26,7 @@ function operate(num1, num2, operator) {
     total = parseInt(total)
     num2 = parseInt(num2)
     
+
     switch (operator) {
         case "+":
             total = add(total, num2)
@@ -45,58 +46,62 @@ function operate(num1, num2, operator) {
 }
 
 let calc = document.querySelector(".numWithOperators")
-let count = 0
+let operand = ""
 let values = []
 let clickInput = ""
+let op = []
+const operationSigns = ["+", "-", "/", "*"]
 calc.addEventListener("click", e => {
     let target = e.target.id
-
-    if (target != "*" && target != "+" && target != "-" && target != "/" && target != "=") {
-        clickInput += target
-        
-    } else {
-        count++
-        values.push(clickInput)
-        if (count < 2) values.push(target)
-        clickInput = ""
-    }
-    console.log("Count" + count)
-    if (count == 2) {
-        num1 = values[0]
-        operator = values[1]
-        num2 = values[2]
-        if (target === "=") {
-            console.log("Empty")
-            values = []
-            count = 0
-        } else {
-            console.log("Not empty")
-            values = [target]
-            count++ 
-        }
-
-        console.log("if")
-        operate(num1, num2, operator)
-
-    } else if (count > 2 && values.length > 1) {
-        num1 = null
-        num2 = values[1]
-        operator = values[0]
-        console.log(values)
-        
-        if (target === "=") {
-            values = []
-            count = 1
-        } else {
-            values = [target]
-            count++ 
-        }
-
-       
-        operate(num1, num2, operator)
-    }
-   
-
     
-    //console.log(values)
+    if (target != "=" && !operationSigns.includes(target)) {
+        clickInput += target
+    } else {
+        if (clickInput) values.push(clickInput)
+        console.log(values)
+        clickInput = ""
+
+        if (target != "=") {
+            op.push(target)
+            
+        }
+        
+    }
+
+    if (target === "=" && values.length >= 1) {
+        if (values.length == 2) {
+            num1 = values[0]
+            num2 = values[1]
+            operator = op.at(-1)
+           
+        } else if (values.length == 1) {
+            num1 = null
+            num2 = values[0]
+            operator = op.at(-1)
+            console.log("Operation: " + operator)
+            
+        }
+        
+        console.log("equal sign")
+        values = []
+        operate(num1, num2, operator)
+        num1 = 0
+    } else if (operationSigns.includes(target)) {
+        if (num1 !== null && values.length >= 2) {
+            num1 = values[0]
+            num2 = values[1]
+            operator = op.at(-2)
+            values = []
+            console.log("not equal not null")
+            operate(num1, num2, operator)
+            num1 = null
+            
+        } else if (num1 === null && values.length >= 1) {
+            num2 = values[0]
+            operator = op.at(-2)
+            values = []
+            console.log('null')
+            operate(num1, num2, operator)
+        }    
+    } 
 })
