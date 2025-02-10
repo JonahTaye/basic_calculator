@@ -1,0 +1,28 @@
+We need to build a calculator site
+So as a normal calculator takes numbers and applies some operation
+
+Issues:
+    * it ha an operator function that takes two numbers and an operation    
+        - how do we use that function if the user enters more than one operation or function continuously
+        - who is going to handle that part the eventlistener or the operator function
+        - I click the button 1, +, 1, then after this should the eventlistener send it to the operator how should it know
+          when to send it to the operator function
+        - Even more complex is if I click 1, +, 2, -, 3, *, 1 how are these managed are they all sent together that wouldn't
+          makes sense cause it won't show on the calculator which numbers you are adding first and it is instructed that 
+          I should only be using 2 pairs of numbers at a time
+
+Ideas:
+    * it a counter so it starts from 0 
+        - everytime the listener is called it adds to the counter
+        - if the counter is equal to three it returns the numbers and the operation 
+        - else if it is greater than 4 will return the number pressed and the operation and the first number will be null
+
+This will work, but how is the operator() func going to handle this
+    * so if number 1 is not null then it's value will be saved inside of total
+    * when calling the operation functions total = operatorfunc(total, number2)
+
+How will index.html look like:
+    * it will have an output div that element 
+    * then two buttons that clear and clear all inside one div
+    * a div that holds the number and operators 
+       
