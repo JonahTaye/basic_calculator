@@ -17,6 +17,12 @@ Ideas:
         - if the counter is equal to three it returns the numbers and the operation 
         - else if it is greater than 4 will return the number pressed and the operation and the first number will be null
 
+    * better idea above one sucks for now:
+        - the operate is called when the = or the operator signs are clicked
+        - if the = sign is pressed and the array is equal to 3 then it calls the oparate func and passes the values
+        - if the other signs are pressed
+            * checks if 
+
 This will work, but how is the operator() func going to handle this
     * so if number 1 is not null then it's value will be saved inside of total
     * when calling the operation functions total = operatorfunc(total, number2)
