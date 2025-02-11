@@ -1,3 +1,14 @@
+const buttons = document.querySelector(".numWithOperators")
+const operation = document.querySelector(".operation")
+const finalvalue = document.querySelector(".result")
+const OPERATORS = ["+", "-", "*", "/", "="]
+let index = 0
+let result = null
+let reset = false
+let number = []
+let operator = []
+let signs = []
+
 function add(number1, number2) {
     return number1 + number2
 }
@@ -11,6 +22,7 @@ function multiply(number1, number2) {
 }
 
 function divide(number1, number2) {
+    if (number2 == 0) return "ERROR"
     return number1 / number2
 }
 
@@ -37,28 +49,20 @@ function operate(num1, num2, operator) {
     return total
 }
 
-const buttons = document.querySelector(".numWithOperators")
-let index = 0
-let number = []
-let operator = []
-let result = null
-const OPERATORS = ["+", "-", "*", "/", "="]
-
-buttons.addEventListener("click", event => {
-    let target = event.target.id
-
+function calculator(target) {
     if (!OPERATORS.includes(target)) {
         if (number[index] === undefined) number[index] = target
         else number[index] += target
     } else if (number.length >= 1) {
         if (number.length >= 2) {
-            if (!result) {
+            if (!result && number.length != 0) {
+                console.log(number.length)
                 result = operate(number[0], number[index], operator.at(-1))
             } else {
                 result = operate(result, number[index], operator.at(-1))
             }
 
-            console.log(result)
+            finalvalue.textContent = result
         }
         
         index++
@@ -69,4 +73,32 @@ buttons.addEventListener("click", event => {
             index = 0
         }
     }
+}
+
+function display(value) {
+    if (!OPERATORS.includes(value)) {
+        if (reset) {
+            operation.textContent = value
+            finalvalue.textContent = 0
+        } else operation.textContent += value
+        
+        reset = false
+            
+    } else {
+        if (value !== "=" ) {
+            if (!result) operation.textContent += ` ${operator.at(-1)} `
+            else operation.textContent = `${result} ${operator.at(-1)} `
+        }
+        else {
+            operation.textContent += ` ${value}`
+            reset = true
+        }
+    }
+}
+
+buttons.addEventListener("click", event => {
+    let target = event.target.id
+    calculator(target)
+    display(target)
 })
+
