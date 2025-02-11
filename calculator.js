@@ -7,7 +7,6 @@ let result = null
 let reset = false
 let number = []
 let operator = []
-let signs = []
 
 function add(number1, number2) {
     return number1 + number2
@@ -55,8 +54,7 @@ function calculator(target) {
         else number[index] += target
     } else if (number.length >= 1) {
         if (number.length >= 2) {
-            if (!result && number.length != 0) {
-                console.log(number.length)
+            if (!result) {
                 result = operate(number[0], number[index], operator.at(-1))
             } else {
                 result = operate(result, number[index], operator.at(-1))
@@ -73,6 +71,7 @@ function calculator(target) {
             index = 0
         }
     }
+    console.log(number)
 }
 
 function display(value) {
@@ -83,14 +82,19 @@ function display(value) {
         } else operation.textContent += value
         
         reset = false
-            
     } else {
-        if (value !== "=" ) {
-            if (!result) operation.textContent += ` ${operator.at(-1)} `
+        if (value !== "=" && number.length != 0) {
+            if (!result) operation.textContent = `${number[0]} ${operator.at(-1)} `
             else operation.textContent = `${result} ${operator.at(-1)} `
-        }
-        else {
-            operation.textContent += ` ${value}`
+        } else if (value === "="){
+            if (operation.textContent.length > 4) {
+                if (!operation.textContent.includes(value)) {
+                    operation.textContent += ` ${value}`
+                }
+                
+            } else {
+                operation.textContent = 0
+            }
             reset = true
         }
     }
