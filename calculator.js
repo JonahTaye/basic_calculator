@@ -57,7 +57,6 @@ function calculator(target) {
         if (number[index] === undefined) number[index] = target
         else {
             if (number[index].length < 15) {
-                console.log(number[index].length)
                 number[index] += target
             }
         }
@@ -80,7 +79,6 @@ function calculator(target) {
             index = 0
         }
     }
-    console.log(number)
 }
 
 function display(value) {
