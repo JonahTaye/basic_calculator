@@ -49,7 +49,11 @@ function operate(num1, num2, operator) {
 }
 
 function calculator(target) {
-    if (!OPERATORS.includes(target)) {
+    if (target === "clear") {
+        number = []
+        index = 0
+        result = null
+    } else if (!OPERATORS.includes(target)) {
         if (number[index] === undefined) number[index] = target
         else number[index] += target
     } else if (number.length >= 1) {
@@ -75,7 +79,11 @@ function calculator(target) {
 }
 
 function display(value) {
-    if (!OPERATORS.includes(value)) {
+    if (value === "clear") {
+        operation.textContent = ""
+        finalvalue.textContent = 0
+
+    } else if (!OPERATORS.includes(value)) {
         if (reset) {
             operation.textContent = value
             finalvalue.textContent = 0
