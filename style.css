@@ -39,6 +39,9 @@ body {
     width: auto;
     height: auto;
     padding: 0 10px;
+}
+
+.result {
     word-break: break-all;
 }
 
