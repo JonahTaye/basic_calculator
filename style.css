@@ -26,7 +26,7 @@ body {
     flex-wrap: wrap;
     align-items: flex-end;
     justify-content: flex-end;
-    gap: 5px;
+    gap: 10px;
     height: auto;
     width: 246;
     border: 3px black solid;
@@ -39,11 +39,9 @@ body {
     width: auto;
     height: auto;
     padding: 0 10px;
-}
-
-.result {
     word-break: break-all;
 }
+
 
 button {
     width: 80px;
