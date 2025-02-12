@@ -27,8 +27,8 @@ function divide(number1, number2) {
 
 function operate(num1, num2, operator) {
     let total = null
-    num1 = parseInt(num1)
-    num2 = parseInt(num2)
+    num1 = Number(num1)
+    num2 = Number(num2)
     
     switch (operator) {
         case "+":
