@@ -55,7 +55,12 @@ function calculator(target) {
         result = null
     } else if (!OPERATORS.includes(target)) {
         if (number[index] === undefined) number[index] = target
-        else number[index] += target
+        else {
+            if (number[index].length < 15) {
+                console.log(number[index].length)
+                number[index] += target
+            }
+        }
     } else if (number.length >= 1) {
         if (number.length >= 2) {
             if (!result) {
@@ -84,11 +89,13 @@ function display(value) {
         finalvalue.textContent = 0
 
     } else if (!OPERATORS.includes(value)) {
-        if (reset) {
-            operation.textContent = value
-            finalvalue.textContent = 0
-        } else operation.textContent += value
-        
+        if (number[index].length < 15) {
+            if (reset) {
+                operation.textContent = value
+                finalvalue.textContent = 0
+            } else operation.textContent += value
+        }
+
         reset = false
     } else {
         if (value !== "=" && number.length != 0) {
